@@ -1,34 +1,175 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="OneScroll: Long Screenshot for iPhone" data-title-zh="一滑长图：iPhone 滚动截长图">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OneScroll · 一滑长图</title>
-<style>
-  :root { --bg: #F7F6F2; --ink: #22211F; --muted: #6E6C67; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #151514; --ink: #F2F0EA; --muted: #9D9A93; }
-  }
-  body { margin: 0; background: var(--bg); color: var(--ink);
-         font: 17px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif; }
-  main { max-width: 680px; margin: 0 auto; padding: 48px 20px 64px; }
-  h1, h2 { font-family: "New York", "Iowan Old Style", Georgia, "Songti SC", serif; }
-  h1 { font-size: 34px; margin: 0 0 8px; }
-  h2 { font-size: 22px; margin: 32px 0 8px; }
-  p { margin: 8px 0; }
-  .muted { color: var(--muted); }
-  a { color: var(--ink); }
-</style>
+<title>OneScroll: Long Screenshot for iPhone</title>
+<meta name="description" content="Tap once in Control Center, scroll, then stop. OneScroll stitches as you go and saves one long screenshot to Photos. Everything happens on your iPhone.">
+<meta property="og:title" content="OneScroll: Long Screenshot">
+<meta property="og:description" content="Scroll once, get one long screenshot. Stitched on your iPhone, nothing uploaded.">
+<meta property="og:image" content="https://jincanli98-creator.github.io/onescroll/img/icon-256.png">
+<meta name="theme-color" content="#F7F6F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151514" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" href="img/favicon-64.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<script src="lang.js"></script>
 </head>
 <body>
-<main>
-  <h1>OneScroll</h1>
-  <p>Scroll once, get one long screenshot. Start from Control Center in any app, scroll, and stop. The long screenshot is saved to Photos. Everything happens on your iPhone.</p>
-  <p class="muted">一滑长图：在任何 App 里从控制中心开始，滑完停下，长图自动存进相册。全部在你的 iPhone 上完成。</p>
-  <h2>Support · 联系我们</h2>
-  <p>Questions, problems or ideas? Email <a href="mailto:onescroll.help@gmail.com">onescroll.help@gmail.com</a>.</p>
-  <p class="muted">有问题或建议，请发邮件到 onescroll.help@gmail.com。</p>
-  <p><a href="privacy.html">Privacy Policy · 隐私政策</a></p>
-</main>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./"><img src="img/icon-256.png" alt=""><span class="en">OneScroll</span><span class="zh">一滑长图</span></a>
+    <nav class="links">
+      <a href="help.html"><span class="en">Help</span><span class="zh">帮助</span></a>
+      <a href="privacy.html"><span class="en">Privacy</span><span class="zh">隐私</span></a>
+      <span class="langs" role="group" aria-label="Language">
+        <button type="button" data-set="en" onclick="setLang('en')">EN</button>
+        <button type="button" data-set="zh" onclick="setLang('zh')">中文</button>
+      </span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img class="app-icon" src="img/icon-256.png" alt="OneScroll app icon">
+      <h1 class="en">One scroll.<br>One long screenshot.</h1>
+      <h1 class="zh">滑一次，<br>就是一整张长图。</h1>
+      <p class="lead en">Tap once in Control Center, scroll, then stop. OneScroll stitches as you go, so the whole chat, article or product page lands in Photos as a single image.</p>
+      <p class="lead zh">在控制中心点一下，往下滑，再停下。一滑长图边滑边拼，整段聊天、整篇文章、整个商品页，几秒后就作为一张图存进相册。</p>
+      <span class="store">
+        <span class="en">Coming soon to the App Store</span>
+        <span class="zh">即将登陆 App Store</span>
+      </span>
+      <p class="req en">For iPhone · Requires iOS 27 or later</p>
+      <p class="req zh">适用于 iPhone · 需要 iOS 27 或更新版本</p>
+    </section>
+
+    <div class="shots" aria-label="Screenshots">
+      <img src="img/shot-1-long-top.jpg" width="660" height="1434" loading="lazy" alt="The top of a long screenshot of a travel plan in Notes">
+      <img src="img/shot-2-long-end.jpg" width="660" height="1434" loading="lazy" alt="The end of the same long screenshot, saved to Photos as a single image">
+      <img src="img/shot-3-home.jpg" width="660" height="1434" loading="lazy" alt="OneScroll's home screen with one big record button">
+      <img src="img/shot-4-private.jpg" width="660" height="1434" loading="lazy" alt="The iOS screen sharing sheet with Share Entire Screen">
+      <img src="img/shot-5-guide.jpg" width="660" height="1434" loading="lazy" alt="The built-in how-to guide">
+    </div>
+
+    <section class="section" id="how">
+      <h2 class="en">Tap, scroll, stop.</h2>
+      <h2 class="zh">点一下，滑一滑，停下。</h2>
+      <p class="sub en">Start right from the page you want. No need to open OneScroll first.</p>
+      <p class="sub zh">在要截的页面直接开始，不用先打开一滑长图。</p>
+      <div class="grid three">
+        <div class="card">
+          <div class="num">1</div>
+          <h3 class="en">Add it to Control Center</h3>
+          <h3 class="zh">加进控制中心</h3>
+          <p class="en">You only do this once. Swipe down from the top-right corner, touch and hold an empty area, tap Add a Control, then search for OneScroll.</p>
+          <p class="zh">只要加一次。从右上角往下拉出控制中心，长按空白处，点「添加控制」，搜「一滑长图」或「OneScroll」。</p>
+        </div>
+        <div class="card">
+          <div class="num">2</div>
+          <h3 class="en">Tap Long Screenshot</h3>
+          <h3 class="zh">点「截长图」</h3>
+          <p class="en">On the page you want, open Control Center and tap Long Screenshot. When iOS asks what to share, choose your entire screen.</p>
+          <p class="zh">停在要截的页面开头，拉出控制中心点「截长图」。系统问要共享什么时，选「整个屏幕」。</p>
+        </div>
+        <div class="card">
+          <div class="num">3</div>
+          <h3 class="en">Scroll, then stop</h3>
+          <h3 class="zh">滑完，点停止</h3>
+          <p class="en">Scroll down at an even pace. Tap the red recording indicator and choose Stop. A few seconds later it's in Photos, and you get a notification.</p>
+          <p class="zh">匀速往下滑。滑完点屏幕顶上的红色录屏标志，选「停止」。几秒后长图就在相册里，还会来一条通知。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <h2 class="en">Small app, one job, done well.</h2>
+      <h2 class="zh">一个小 App，把一件事做好。</h2>
+      <p class="sub en">No pile of screenshots to stitch by hand, and nothing to learn.</p>
+      <p class="sub zh">不用截一堆图再手动拼，也没什么要学的。</p>
+      <div class="grid three">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></div>
+          <h3 class="en">Works almost anywhere</h3>
+          <h3 class="zh">哪里都能截</h3>
+          <p class="en">Chats, social feeds, articles, shopping pages and documents.</p>
+          <p class="zh">聊天记录、社交动态、文章、商品页、文档都能截。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6.5 10.5 12 16l5.5-5.5"/><path d="M5 20h14"/></svg></div>
+          <h3 class="en">Stitches while you scroll</h3>
+          <h3 class="zh">边滑边拼</h3>
+          <p class="en">No waiting. The long screenshot is saved to Photos a few seconds after you stop.</p>
+          <p class="zh">不用等。停下几秒，长图就自动存进相册。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9-1.9 5.1-1.9-5.1-5.1-1.9 5.1-1.9z"/><path d="M18.5 16v4M16.5 18h4"/></svg></div>
+          <h3 class="en">Clean results</h3>
+          <h3 class="zh">画面干净</h3>
+          <p class="en">The Dynamic Island and recording indicator are removed, and the status bar is trimmed (or kept, if you prefer).</p>
+          <p class="zh">灵动岛和录屏红点自动抹掉，顶部状态栏默认去掉，想留也可以留。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v14h14"/><path d="M3 7h14v14"/></svg></div>
+          <h3 class="en">Crop and share</h3>
+          <h3 class="zh">裁切、分享</h3>
+          <p class="en">Trim the start and end with a guide line, then save or share.</p>
+          <p class="zh">用参考线裁掉开头、结尾，再保存或分享。</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg></div>
+          <h3 class="en">Private by design</h3>
+          <h3 class="zh">隐私放第一</h3>
+          <p class="en">Everything happens on your iPhone. Nothing is uploaded, no data is collected, and it only adds to Photos, never reads them. <a href="privacy.html">Privacy Policy</a></p>
+          <p class="zh">所有处理都在你的 iPhone 上完成。不上传、不收集任何数据，只往相册里添加，从不读取。<a href="privacy.html">隐私政策</a></p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></div>
+          <h3 class="en">No account, no ads</h3>
+          <h3 class="zh">不用注册，没有广告</h3>
+          <p class="en">Open it and go. Light and dark mode, in English and Chinese.</p>
+          <p class="zh">打开就能用。支持浅色、深色模式，中文和英文界面。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="price">
+      <h2 class="en">Try it free. Pay once.</h2>
+      <h2 class="zh">先免费试，再一次买断。</h2>
+      <div class="card price">
+        <p class="big en">5 free long screenshots</p>
+        <p class="big zh">前 5 张免费</p>
+        <p class="then en">Then unlock the full version with a one-time purchase.</p>
+        <p class="then zh">之后一次性购买，解锁完整版。</p>
+        <ul class="ticks en">
+          <li>No subscription, nothing renews</li>
+          <li>Unlimited long screenshots after unlocking</li>
+          <li>Restore Purchases brings it back on a new iPhone</li>
+        </ul>
+        <ul class="ticks zh">
+          <li>不是订阅，不会自动续费</li>
+          <li>解锁后不限张数</li>
+          <li>换新 iPhone 点「恢复购买」就能找回</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" style="text-align:center">
+      <p class="en">Questions? Read the <a href="help.html">Help page</a> or email <a href="mailto:onescroll.help@gmail.com">onescroll.help@gmail.com</a>.</p>
+      <p class="zh">有问题？看看<a href="help.html">使用帮助</a>，或者发邮件到 <a href="mailto:onescroll.help@gmail.com">onescroll.help@gmail.com</a>。</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <nav class="links">
+      <a href="help.html"><span class="en">Help</span><span class="zh">使用帮助</span></a>
+      <a href="privacy.html"><span class="en">Privacy Policy</span><span class="zh">隐私政策</span></a>
+      <a href="mailto:onescroll.help@gmail.com"><span class="en">Contact</span><span class="zh">联系我们</span></a>
+    </nav>
+    <p>© 2026 OneScroll</p>
+    <p class="en">Apple, iPhone and App Store are trademarks of Apple Inc., registered in the U.S. and other countries.</p>
+    <p class="zh">Apple、iPhone 和 App Store 是 Apple Inc. 在美国及其他国家和地区注册的商标。</p>
+  </footer>
+</div>
 </body>
 </html>
