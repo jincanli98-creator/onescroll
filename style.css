@@ -107,20 +107,14 @@ html:not([data-lang]) .langs [data-set="en"] { background: var(--ink); color: va
   max-width: 620px;
   margin: 0 auto;
 }
-/* 上架前只是一句提示，做成描边样式，不像能点的按钮；上架后换成 App Store 官方徽章链接 */
+/* App Store 官方徽章（苹果营销工具下载的黑色版，中英文各一张）：不能改图，高度 ≥ 40px，
+   四周留白 ≥ 徽章高度的 1/4，这里用 padding 留出来 */
 .store {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 28px;
-  padding: 11px 24px;
-  border-radius: 14px;
-  border: 1.5px solid var(--line);
-  color: var(--ink);
-  font-weight: 600;
-  text-decoration: none;
+  display: inline-block;
+  margin-top: 14px;
+  padding: 14px;
 }
-.store small { font-weight: 400; font-size: 13px; opacity: 0.75; }
+.store img { height: 54px; width: auto; max-width: none; }
 .req { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
 
 /* 截图条：手机上左右滑，宽屏上一排放下 */
