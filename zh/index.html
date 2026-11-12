@@ -24,7 +24,7 @@
 <meta name="apple-itunes-app" content="app-id=6829387998">
 <link rel="icon" type="image/png" href="/img/favicon-64.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css?v=13">
+<link rel="stylesheet" href="/style.css?v=15">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "MobileApplication", "name": "一滑长图（OneScroll）", "description": "在控制中心点一下，往下滑，再停下。一滑长图边滑边拼，把一张长截图存进相册。所有处理都在你的 iPhone 上完成。", "url": "https://onescrollapp.com/zh/", "image": "https://onescrollapp.com/img/icon-256.png", "operatingSystem": "iOS 27", "applicationCategory": "UtilitiesApplication", "availableOnDevice": "iPhone", "installUrl": "https://apps.apple.com/app/id6829387998", "downloadUrl": "https://apps.apple.com/app/id6829387998", "inLanguage": "zh-Hans", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "免费下载，前 5 张长图免费；之后在 App 内一次性购买解锁完整版，不限张数，不是订阅。"}}</script>
 </head>
 <body>
@@ -54,36 +54,32 @@
       <div class="hero-media"><div class="longdemo" role="img" aria-label="一张旅行计划的长截图穿过 iPhone 的屏幕，这张图比屏幕长好几倍。"><div class="longdemo-behind"><img class="longdemo-strip" src="/img/hero-long.webp" width="520" height="3170" alt=""></div><div class="longdemo-phone"><img class="longdemo-strip" src="/img/hero-long.webp" width="520" height="3170" alt=""></div></div></div>
     </section>
 
-    <div class="shots" aria-label="截图">
-      <img src="/img/shot-1-long-top.jpg" width="660" height="1434" loading="lazy" alt="一张长图的开头：备忘录里的旅行计划">
-      <img src="/img/shot-2-long-end.jpg" width="660" height="1434" loading="lazy" alt="同一张长图的结尾，作为一张图片存进相册">
-      <img src="/img/shot-3-home.jpg" width="660" height="1434" loading="lazy" alt="一滑长图的首页，只有一个大大的开始按钮">
-      <img src="/img/shot-4-private.jpg" width="660" height="1434" loading="lazy" alt="系统的屏幕共享界面，选「共享整个屏幕」">
-      <img src="/img/shot-5-guide.jpg" width="660" height="1434" loading="lazy" alt="App 里自带的使用图解">
-    </div>
-
     <section class="section" id="how">
       <h2>点一下，滑一滑，停下。</h2>
-      <div class="tryit" data-step="1">
-        <div class="ti-live">
-          <div class="ti-stage" aria-hidden="true">
-            <div class="ti-phone"><img class="ti-page" src="/img/hero-long.webp" width="520" height="3170" alt="" loading="lazy"><i class="ti-island"></i></div>
-            <div class="ti-result">
-              <div class="ti-strip"><img src="/img/hero-long.webp" width="520" height="3170" alt="" loading="lazy"></div>
-              <span class="ti-saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>已存入相册</span>
+      <div class="demo" data-step="1">
+        <div class="demo-live">
+          <p class="demo-cap" data-caps="[&quot;从右上角下拉，打开控制中心&quot;, &quot;点「截长图」&quot;, &quot;选「共享整个屏幕」&quot;, &quot;往下滑，边滑边拼&quot;, &quot;滑完，点顶上的红色标志&quot;, &quot;点「停止」（Stop）&quot;, &quot;长图已存入相册&quot;]"></p>
+          <div class="demo-stage" aria-hidden="true">
+            <div class="demo-phone">
+              <img class="demo-page" src="/img/hero-long.webp" width="520" height="3170" alt="" loading="lazy">
+              <div class="demo-cc"><img src="/img/demo-control-center.webp" width="440" height="708" alt="" loading="lazy"></div>
+              <div class="demo-sheet"><img src="/img/demo-share-sheet.webp" width="440" height="953" alt="" loading="lazy"></div>
+              <div class="demo-dim"></div>
+              <div class="demo-dialog"><b>Screen Sharing</b><span>Stop sharing screen with OneScroll?</span><div><i>Cancel</i><i class="demo-stopbtn">Stop</i></div></div>
+              <i class="demo-island"></i>
+              <i class="demo-finger"></i>
+            </div>
+            <div class="demo-result">
+              <div class="demo-strip"><img src="/img/hero-long.webp" width="520" height="3170" alt="" loading="lazy"></div>
+              <span class="demo-saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>已存入相册</span>
             </div>
           </div>
-          <div class="ti-track">
-            <span class="ti-line"></span>
-            <span class="ti-stop" style="--at:0"></span><span class="ti-stop" style="--at:.5"></span><span class="ti-stop" style="--at:1"></span>
-            <input type="range" min="0" max="1000" value="0" step="1" aria-label="试一试：从「点一下」拖到「停下」">
-            <span class="ti-knob" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5" fill="currentColor"/></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6.5l5 5 5-5M7 13l5 5 5-5"/></svg>
-              <svg viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5" fill="currentColor"/></svg>
-            </span>
+          <div class="demo-bar">
+            <div class="demo-band"></div>
+            <input type="range" min="0" max="1000" value="0" step="1" aria-label="演示进度：从打开控制中心到长图存入相册">
+            <div class="demo-lens"></div>
           </div>
-          <p class="ti-hint">拖动圆钮，试试看</p>
+          <p class="demo-hint">拖动玻璃把手，可以自己一步一步看</p>
         </div>
         <ol class="stepper">
         <li>
@@ -193,54 +189,145 @@
   </footer>
 </div>
 <script>
-// 「三步用法」里可以拖的演示。把手的位置 0~1 写进 --p，画面怎么变都在 style.css 里按 --p 算。
-// 这一段滚进屏幕时先自己演一遍；人一碰就停下，交给人拖。浏览器没开 JS 时只显示三步文字。
+// 首页「三步用法」里的演示：下拉控制中心 → 点截长图 → 共享整个屏幕 → 滑 → 点红色标志 → 停止 → 存进相册。
+// 画面全部由一个 0~1 的进度 p 决定：这里按 p 算出每个部件的状态，写成 CSS 变量，怎么画在 style.css 里。
+// 滚到这一段时自动来回播放；拖进度条就是改 p，松手几秒后接着演。浏览器没开 JS 时只显示下面三步文字。
 (function () {
-  var box = document.querySelector('.tryit');
+  var box = document.querySelector('.demo');
   if (!box) return;
   var input = box.querySelector('input');
-  var titles = box.querySelectorAll('.stepper h3');
-  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var frame = 0;
-  function show() {
-    var p = input.value / 1000;
-    var step = p < 0.03 ? 1 : p < 0.94 ? 2 : 3;
-    box.style.setProperty('--p', p);
-    box.setAttribute('data-step', step);
-    if (titles[step - 1]) input.setAttribute('aria-valuetext', titles[step - 1].textContent);
+  var band = box.querySelector('.demo-bar > .demo-band');
+  var lens = box.querySelector('.demo-lens');
+  var cap = box.querySelector('.demo-cap');
+  var phone = box.querySelector('.demo-phone');
+  var caps = JSON.parse(cap.getAttribute('data-caps'));
+
+  // 每一步从进度的哪里开始、图标放在进度条的哪里（null 是中间「滑动」那一长段）
+  var STEPS = [[0.00, 0.05], [0.10, 0.15], [0.20, 0.26], [0.32, null], [0.72, 0.77], [0.82, 0.875], [0.94, 0.965]];
+  var S = 'fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"';
+  var ICONS = [
+    '<svg viewBox="0 0 24 24" ' + S + '><path d="M5 5h14"/><path d="M12 9v9M7.5 13.5L12 18l4.5-4.5"/></svg>',
+    '<svg viewBox="0 0 24 24" ' + S + '><rect x="6" y="3.5" width="12" height="17" rx="3"/><path d="M9.5 9h5M9.5 13h5"/></svg>',
+    '<svg viewBox="0 0 24 24" ' + S + '><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/></svg>',
+    null,
+    '<svg viewBox="0 0 24 24" ' + S + '><rect x="2.5" y="7.5" width="19" height="9" rx="4.5"/><circle cx="7.5" cy="12" r="2" fill="currentColor" stroke="none"/></svg>',
+    '<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3" fill="currentColor"/></svg>',
+    '<svg viewBox="0 0 24 24" ' + S + ' stroke-width="2.8"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+  ];
+  var icons = STEPS.map(function (s, i) {
+    return s[1] === null ? '<span class="demo-pages"><span></span><span></span><span></span><span></span><span></span></span>'
+      : '<span class="demo-st" style="--at:' + s[1] + '">' + ICONS[i] + '</span>';
+  }).join('');
+  band.innerHTML = '<div class="demo-layer">' + icons + '</div><div class="demo-layer color">' + icons + '</div>';
+  var lensBand = band.cloneNode(true);
+  lens.appendChild(lensBand);
+
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function seg(p, a, b) { return clamp((p - a) / (b - a)); }
+  function ease(t) { return t * t * (3 - 2 * t); }
+  function out(t) { return 1 - Math.pow(1 - t, 3); }
+  // 手指在一段进度里：出现、按下、抬起
+  function tap(p, a, b) {
+    var t = seg(p, a, b);
+    if (t <= 0 || t >= 1) return null;
+    return { o: Math.min(1, t / 0.2, (1 - t) / 0.2), press: t > 0.35 && t < 0.7 ? 1 : 0 };
   }
-  function hands() {
-    if (frame) cancelAnimationFrame(frame);
-    frame = 0;
-    box.classList.add('touched');
+  var stopAt = { x: 69, y: 55 };
+  function measure() {
+    var r = phone.getBoundingClientRect(), b = box.querySelector('.demo-stopbtn').getBoundingClientRect();
+    if (r.width) stopAt = { x: (b.left + b.width / 2 - r.left) / r.width * 100, y: (b.top + b.height / 2 - r.top) / r.height * 100 };
+    box.style.setProperty('--bandw', band.clientWidth + 'px');
   }
-  function glide(from, to, ms, done) {
-    var start = performance.now();
-    (function tick(now) {
-      var t = Math.min(1, (now - start) / ms);
-      var eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      input.value = Math.round((from + (to - from) * eased) * 1000);
-      show();
-      if (t < 1) frame = requestAnimationFrame(tick);
-      else { frame = 0; if (done) done(); }
-    })(start);
+
+  var p = 0, lastStep = -1;
+  function render() {
+    var v = {};
+    v.cc = ease(seg(p, 0.03, 0.08)) * (1 - ease(seg(p, 0.185, 0.205)));
+    v.ring = seg(p, 0.10, 0.12) * (1 - seg(p, 0.185, 0.2));
+    v.sheet = ease(seg(p, 0.185, 0.205)) * (1 - ease(seg(p, 0.30, 0.32)));
+    v.rec = seg(p, 0.30, 0.315) * (1 - seg(p, 0.935, 0.95));
+    v.rec2 = seg(p, 0.30, 0.33);
+    // 滑动分三下：手指划的时候页面跟着走，松手后再滑一点
+    var s = seg(p, 0.32, 0.72), i = Math.min(2, Math.floor(s * 3)), local = s * 3 - i;
+    v.scroll = s >= 1 ? 1 : (i + out(Math.min(1, local / 0.8))) / 3;
+    v.hot = seg(p, 0.765, 0.785) * (1 - seg(p, 0.935, 0.95));
+    v.dialog = ease(seg(p, 0.80, 0.825)) * (1 - ease(seg(p, 0.925, 0.945)));
+    v.done = ease(seg(p, 0.945, 0.985));
+    var f = { x: 50, y: 50, o: 0, press: 0 }, t;
+    if (p < 0.09) {                       // 从右上角往下拉
+      t = seg(p, 0.008, 0.075);
+      f = { x: 84, y: 2 + 30 * ease(t), o: Math.min(1, t / 0.15, (1 - t) / 0.2), press: 0 };
+    } else if ((t = tap(p, 0.105, 0.18))) f = { x: 13.1, y: 76.8, o: t.o, press: t.press };      // 控制中心里的「截长图」
+    else if ((t = tap(p, 0.235, 0.305))) f = { x: 50, y: 58.8, o: t.o, press: t.press };         // Share Entire Screen
+    else if (s > 0 && s < 1 && local < 0.62) {
+      t = local / 0.62;
+      f = { x: 64, y: 74 - 42 * ease(t), o: Math.min(1, t / 0.15, (1 - t) / 0.2), press: 0 };
+    } else if ((t = tap(p, 0.735, 0.80))) f = { x: 50, y: 4.2, o: t.o, press: t.press };          // 顶上的红色标志
+    else if ((t = tap(p, 0.855, 0.925))) f = { x: stopAt.x, y: stopAt.y, o: t.o, press: t.press };
+    v.fx = f.x; v.fy = f.y; v.fo = Math.max(0, f.o); v.fp = f.press;
+    for (var k in v) box.style.setProperty('--' + k, (+v[k]).toFixed(4));
+    // 进度条：把手中心在流程带上的位置，和把手里放大的那一截
+    var w = band.clientWidth, x = 29 + p * (w - 58);
+    box.style.setProperty('--fillpx', x.toFixed(1) + 'px');
+    box.style.setProperty('--lenspx', (x - 29).toFixed(1) + 'px');
+    lensBand.style.transform = 'translate(' + (29 - x * 1.45).toFixed(1) + 'px,' + (46 - 32 * 1.45).toFixed(1) + 'px) scale(1.45)';
+    var step = 0;
+    for (var n = 0; n < STEPS.length; n++) if (p >= STEPS[n][0]) step = n;
+    if (step !== lastStep) {
+      lastStep = step;
+      cap.innerHTML = '<small>' + (step + 1) + ' / ' + STEPS.length + '</small><span></span>';
+      cap.lastChild.textContent = caps[step];
+      input.setAttribute('aria-valuetext', caps[step]);
+      // 下面三步文字：点一下（前三步）、滑（第四步）、停下（后三步）
+      box.setAttribute('data-step', step < 3 ? 1 : step === 3 ? 2 : 3);
+    }
   }
-  input.addEventListener('input', function () { hands(); show(); });
-  ['pointerdown', 'touchstart', 'keydown'].forEach(function (name) {
-    input.addEventListener(name, hands, { passive: true });
-  });
+
+  // 自动播放：往前演完，停一下，把手滑回开头，再来一遍。人一拖就停，松手几秒后接着演；滚出屏幕就不演了
+  var FORWARD = 15000, BACK = 1400, HOLD_END = 2200, HOLD_START = 700, RESUME = 2500;
+  var mode = 'forward', wait = 0, last = 0, idleUntil = 0, visible = true, running = false;
+  function frame(now) {
+    if (!visible) { running = false; return; }
+    var dt = Math.min(100, now - (last || now));
+    last = now;
+    if (now >= idleUntil) {
+      if (wait > 0) wait -= dt;
+      else if (mode === 'forward') {
+        p += dt / FORWARD;
+        if (p >= 1) { p = 1; mode = 'back'; wait = HOLD_END; }
+      } else {
+        p -= dt / BACK;
+        if (p <= 0) { p = 0; mode = 'forward'; wait = HOLD_START; }
+      }
+      input.value = Math.round(p * 1000);
+      render();
+    }
+    requestAnimationFrame(frame);
+  }
+  function start() { if (!running && visible) { running = true; last = 0; requestAnimationFrame(frame); } }
+  function hands() { idleUntil = performance.now() + RESUME; mode = 'forward'; wait = 0; }
+  input.addEventListener('input', function () { p = input.value / 1000; hands(); render(); });
+  ['pointerdown', 'touchstart', 'keydown'].forEach(function (name) { input.addEventListener(name, hands, { passive: true }); });
+  function refit() { measure(); render(); }
+  window.addEventListener('resize', refit);
+  window.addEventListener('load', refit);
+  // 检查用：demoSet(0.5) 跳到某个进度并停住
+  window.demoSet = function (value) { p = value; idleUntil = Infinity; input.value = Math.round(p * 1000); refit(); };
   box.classList.add('is-live');
-  show();
-  if (reduce || !('IntersectionObserver' in window)) return;
-  var seen = new IntersectionObserver(function (entries) {
-    if (!entries[0].isIntersecting) return;
-    seen.disconnect();
-    if (box.classList.contains('touched')) return;
-    glide(0, 1, 5200, function () {
-      setTimeout(function () { if (!box.classList.contains('touched')) glide(1, 0, 900); }, 1600);
-    });
-  }, { threshold: 0.9 });
-  seen.observe(box.querySelector('.ti-track'));
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    p = 0.56;                              // 不自动播放，停在滑动的画面上，仍然可以拖
+    input.value = 560;
+    refit();
+    return;
+  }
+  refit();
+  if ('IntersectionObserver' in window) {
+    visible = false;
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      start();
+    }, { threshold: 0.2 }).observe(box.querySelector('.demo-stage'));
+  } else start();
 })();
 </script>
 </body>

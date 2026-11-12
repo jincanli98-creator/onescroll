@@ -265,33 +265,6 @@ h1, h2 { text-wrap: balance; }
   .hero-media { justify-self: end; }
 }
 
-/* 截图条：手机上左右滑，宽屏上一排放下 */
-.shots {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  padding: 32px 20px 16px;
-  margin: 0 -20px;
-  scrollbar-width: none;
-}
-.shots::-webkit-scrollbar { display: none; }
-.shots img {
-  flex: 0 0 auto;
-  width: 220px;
-  height: auto;
-  aspect-ratio: 660 / 1434;
-  border-radius: 18px;
-  scroll-snap-align: center;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
-  background: var(--card);
-}
-@media (min-width: 1000px) {
-  .shots { overflow: visible; margin: 0; padding: 32px 0 16px; justify-content: center; }
-  .shots img { width: calc((100% - 64px) / 5); }
-}
-
 /* 各段 */
 .section { padding: 48px 0; }
 .section h2 { font-size: clamp(26px, 4.5vw, 36px); margin: 0 0 8px; text-align: center; }
@@ -371,181 +344,169 @@ h1, h2 { text-wrap: balance; }
   }
 }
 
-/* 三步用法里可以拖的演示（JS 开着才显示）。把手位置是 --p（0~1），由首页的脚本写进来：
-   --tap 刚开始那一点（点一下）、--scroll 中间那一大段（滑）、--stop 最后那一点（停下、存好） */
-.tryit {
-  --p: 0;
-  --k: 1;   /* 演示画面的放大倍数，宽屏上大一些 */
-  --tap: clamp(0, calc(var(--p) / 0.05), 1);
-  --scroll: clamp(0, calc((var(--p) - 0.05) / 0.87), 1);
-  --stop: clamp(0, calc((var(--p) - 0.92) / 0.07), 1);
+/* ===== 首页「三步用法」里的演示（JS 开着才显示；脚本在 build.py 的 DEMO_SCRIPT，按进度把各部件的状态写成 CSS 变量） ===== */
+.demo-live { display: none; }
+.demo.is-live .demo-live { display: block; }
+.demo { --k: 1; max-width: 920px; margin: 0 auto; }
+@media (min-width: 760px) { .demo { --k: 1.12; } }
+/* 当前这一步的说明 */
+.demo-cap {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 2.7em; margin: 20px 0 0; text-align: center; font: 700 19px/1.3 var(--serif); text-wrap: balance;
 }
-.ti-live { display: none; max-width: 920px; margin: 0 auto; }
-.tryit.is-live .ti-live { display: block; }
-.ti-stage {
+.demo-cap small { flex: none; font: 600 13px/1 var(--sans); color: var(--accent); white-space: nowrap; }
+@media (min-width: 760px) { .demo-cap { font-size: 22px; min-height: 1.7em; } }
+/* 画面里的尺寸都用 em，1em = 10px × 放大倍数 */
+.demo-stage {
+  font-size: calc(var(--k) * 10px);
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: calc(var(--k) * 56px);
-  height: calc(var(--k) * 378px + 58px);
-  margin-top: 34px;
+  gap: 3.4em;
+  height: calc(46.4em + 54px);
+  margin-top: 14px;
 }
-/* 左边：手机里的页面跟着把手往上滚（图 130 宽时高 792.5，屏幕高 282，一共能滚 510.5） */
-.ti-phone {
+.demo-phone {
   position: relative;
   flex: none;
-  width: calc(var(--k) * 130px);
-  height: calc(var(--k) * 282px);
-  border-radius: calc(var(--k) * 24px);
+  width: 21em;
+  height: 45.5em;
+  border-radius: 3.6em;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 0 0 5px #1E1513, 0 0 0 6px rgba(255, 255, 255, 0.14), 0 16px 30px rgba(60, 25, 15, 0.2);
+  box-shadow: 0 0 0 0.65em #1E1513, 0 0 0 0.75em rgba(255, 255, 255, 0.14), 0 2em 4em rgba(60, 25, 15, 0.22);
 }
-.ti-page {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: auto;
-  max-width: none;
-  transform: translateY(calc(var(--scroll) * var(--k) * -510.5px));
-  will-change: transform;
+/* 页面：一张真实的长截图（21em 宽时高 128.03em，能滚 82.53em） */
+.demo-page { position: absolute; left: 0; top: 0; width: 100%; height: auto; max-width: none; transform: translateY(calc(var(--scroll) * -82.53em)); will-change: transform; }
+/* 控制中心：真实截图，从上面滑下来。截图不是整屏，上下留出的地方用同样的深色补上 */
+.demo-cc { position: absolute; inset: 0; background: #222123; opacity: var(--cc); transform: translateY(calc((1 - var(--cc)) * -7%)); }
+.demo-cc img {
+  position: absolute; left: 0; top: 8%; width: 100%; height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
 }
-/* 灵动岛；开始以后变红（录屏标志），停下后变回去 */
-.ti-island {
-  position: absolute;
-  top: calc(var(--k) * 6px);
-  left: 50%;
-  width: calc(var(--k) * 40px);
-  height: calc(var(--k) * 12px);
-  margin-left: calc(var(--k) * -20px);
-  border-radius: 99px;
-  background: #111;
+/* 圈出「截长图」那个按钮 */
+.demo-cc::after {
+  content: ""; position: absolute; left: 13.1%; top: 76.8%; width: 5.4em; height: 5.4em; margin: -2.7em;
+  border-radius: 50%; box-shadow: 0 0 0 0.28em var(--accent), 0 0 1.6em 0.3em rgba(238, 90, 79, 0.55);
+  opacity: var(--ring);
 }
-.ti-island::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 99px;
-  background: #E3343F;
-  opacity: calc(var(--tap) * (1 - var(--stop)));
+/* 系统的「屏幕共享」界面：真实截图 */
+.demo-sheet { position: absolute; inset: 0; opacity: var(--sheet); }
+.demo-sheet img { width: 100%; height: 100%; display: block; }
+/* 停止共享的确认框：照真实截图的版式画的（给的截图是深色模式，这里画成浅色，跟页面一致） */
+.demo-dim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.2); opacity: var(--dialog); }
+.demo-dialog {
+  position: absolute; left: 9.5%; right: 9.5%; top: 42.5%;
+  padding: 1.7em 1.3em 1.3em; border-radius: 2.7em;
+  background: rgba(250, 250, 252, 0.96); box-shadow: 0 1em 3em rgba(0, 0, 0, 0.28);
+  text-align: left; font-family: var(--sans); line-height: 1.25;
+  opacity: var(--dialog); transform: scale(calc(0.9 + 0.1 * var(--dialog)));
 }
-/* 右边：拼出来的长图，从一屏长到整张（62 宽时整张高 378） */
-.ti-result { position: relative; flex: none; width: calc(var(--k) * 62px); height: calc(var(--k) * 378px); }
-/* 虚线框：长图最后会长到这么长 */
-.ti-result::before { content: ""; position: absolute; inset: 0; border: 1.5px dashed var(--line); border-radius: 9px; }
-.ti-strip {
-  position: relative;
-  width: 100%;
-  height: calc(var(--k) * 378px * (0.356 + 0.644 * var(--scroll)));
-  overflow: hidden;
-  border-radius: 9px;
-  background: #fff;
-  opacity: var(--tap);
-  box-shadow: 0 0 0 1px rgba(40, 20, 10, 0.12), 0 8px 20px rgba(60, 25, 15, 0.14), 0 0 0 calc(var(--stop) * 3px) var(--accent);
+.demo-dialog b { display: block; font-size: 1.3em; font-weight: 700; color: #000; padding: 0 0.5em; }
+.demo-dialog span { display: block; font-size: 1em; color: #6C6C72; margin-top: 0.45em; padding: 0 0.65em; }
+.demo-dialog div { display: flex; gap: 0.6em; margin-top: 1.25em; }
+.demo-dialog i { flex: 1; font-style: normal; text-align: center; padding: 0.72em 0; border-radius: 99em; font-size: 1.12em; font-weight: 600; background: #E3E3E8; color: #000; }
+.demo-dialog i + i { background: #0A84FF; color: #fff; }
+/* 灵动岛。录屏时左边有个红点；点它的时候变宽、描红边（跟真实截图一样） */
+.demo-island {
+  position: absolute; top: 0.9em; left: 50%; height: 2em; width: calc(7em + var(--hot) * 5.6em);
+  transform: translateX(-50%); border-radius: 99em; background: #000;
+  box-shadow: 0 0 0 0.14em rgba(227, 52, 63, var(--hot));
 }
-.ti-strip img { width: 100%; height: auto; max-width: none; }
-.ti-saved {
-  position: absolute;
-  left: 50%;
-  top: calc(100% + 14px);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 13px 6px 10px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: var(--stop);
-  transform: translate(-50%, calc((1 - var(--stop)) * 8px));
+.demo-island::before {
+  content: ""; position: absolute; left: 0.55em; top: 0.5em; width: 1em; height: 1em; border-radius: 50%;
+  background: #FF3B30; box-shadow: 0 0 0 0.16em #000, 0 0 0 0.3em rgba(255, 59, 48, 0.9); opacity: var(--rec);
 }
-.ti-saved svg { width: 14px; height: 14px; }
-/* 轨道和把手。真正能拖的是一个透明的滑块（键盘、触屏都能用），看到的把手是画出来的 */
-.ti-track { position: relative; height: 48px; max-width: 520px; margin: 10px auto 0; }
-.ti-line { position: absolute; left: 24px; right: 24px; top: 21px; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
-.ti-line::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: left center; transform: scaleX(var(--p)); }
-.ti-stop {
-  position: absolute;
-  top: 18px;
-  left: calc(24px + var(--at) * (100% - 48px));
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
-  border-radius: 50%;
-  background: var(--card);
-  box-shadow: 0 0 0 2px var(--line);
+/* 手指 */
+.demo-finger {
+  position: absolute; left: calc(var(--fx) * 1%); top: calc(var(--fy) * 1%); width: 3.2em; height: 3.2em; margin: -1.6em;
+  border-radius: 50%; background: rgba(70, 70, 78, 0.38); border: 0.16em solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0.3em 0.9em rgba(0, 0, 0, 0.3); opacity: var(--fo); transform: scale(calc(1 - var(--fp) * 0.24)); pointer-events: none;
 }
-.ti-track input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  cursor: grab;
-  -webkit-appearance: none;
-  appearance: none;
-  touch-action: pan-y;
+.demo-finger::after {
+  content: ""; position: absolute; inset: -0.9em; border-radius: 50%; border: 0.18em solid var(--accent);
+  opacity: var(--fp); transform: scale(calc(0.55 + var(--fp) * 0.5));
 }
-.ti-track input:active { cursor: grabbing; }
-.ti-track input::-webkit-slider-thumb { -webkit-appearance: none; width: 48px; height: 48px; }
-.ti-track input::-moz-range-thumb { width: 48px; height: 48px; border: 0; }
-.ti-knob {
-  position: absolute;
-  top: 0;
-  left: calc(24px + var(--p) * (100% - 48px));
-  width: 48px;
-  height: 48px;
-  margin-left: -24px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #FF8F5E, #E3343F);
-  box-shadow: 0 6px 16px rgba(227, 52, 63, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.28);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
+/* 右边：拼出来的长图（7.6em 宽时整张高 46.33em），从一屏长到整张 */
+.demo-result { position: relative; flex: none; width: 7.6em; height: 46.33em; }
+.demo-result::before { content: ""; position: absolute; inset: 0; border: 1.5px dashed var(--line); border-radius: 1em; }
+.demo-strip {
+  position: relative; width: 100%; height: calc(46.33em * (0.3554 + 0.6446 * var(--scroll))); overflow: hidden;
+  border-radius: 1em; background: #fff; opacity: var(--rec2);
+  box-shadow: 0 0 0 1px rgba(40, 20, 10, 0.12), 0 0.8em 2em rgba(60, 25, 15, 0.14), 0 0 0 calc(var(--done) * 3px) var(--accent);
 }
-/* 把手上的图标：开始前是圆点（点一下），滑的时候是向下的箭头，最后是方块（停止） */
-.ti-knob svg { grid-area: 1 / 1; width: 22px; height: 22px; opacity: 0; transition: opacity 0.15s ease; }
-.tryit[data-step="1"] .ti-knob svg:nth-child(1),
-.tryit[data-step="2"] .ti-knob svg:nth-child(2),
-.tryit[data-step="3"] .ti-knob svg:nth-child(3) { opacity: 1; }
-.ti-track input:focus-visible ~ .ti-knob { outline: 3px solid var(--ink); outline-offset: 3px; }
-/* 还没人碰过时，把手轻轻晃一下，提示可以拖 */
-.tryit.is-live:not(.touched)[data-step="1"] .ti-knob { animation: ti-nudge 1.8s ease-in-out infinite; }
-@keyframes ti-nudge {
-  0%, 55%, 100% { transform: translateX(0); }
-  28% { transform: translateX(9px); }
+.demo-strip img { width: 100%; height: auto; max-width: none; display: block; }
+.demo-saved {
+  position: absolute; right: -4px; top: calc(100% + 14px); display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 13px 6px 10px; border-radius: 999px; background: var(--accent); color: #fff; font: 600 13px/1.4 var(--sans); white-space: nowrap;
+  opacity: var(--done); transform: translateY(calc((1 - var(--done)) * 8px));
 }
-@media (prefers-reduced-motion: reduce) {
-  .tryit .ti-knob { animation: none !important; }
+.demo-saved svg { width: 14px; height: 14px; }
+
+/* ===== 进度条：一根凹进去的玻璃管，里面是一条「流程带」，走过的地方上色；把手是一颗放大镜一样的玻璃胶囊 ===== */
+.demo-bar {
+  position: relative; width: min(620px, 100%); height: 78px; margin: 4px auto 0; padding: 7px; border-radius: 39px;
+  background: linear-gradient(180deg, #D6CEC2, #F5F1EA);
+  box-shadow: inset 0 2px 6px rgba(70, 45, 25, 0.3), inset 0 -1px 0 #fff, 0 1px 0 rgba(255, 255, 255, 0.8), 0 14px 30px rgba(90, 40, 25, 0.1);
 }
-.ti-hint { text-align: center; color: var(--muted); font-size: 14px; margin: 6px 0 0; transition: opacity 0.2s ease; }
-.tryit.touched .ti-hint { opacity: 0; }
-/* 有演示时，三步文字跟着把手亮：演到哪一步，那一步变红 */
-.tryit.is-live .stepper { margin-top: 14px; }
-.tryit.is-live .stepper h3 { transition: color 0.2s ease; }
-.tryit.is-live .stepper .num { background: var(--line); color: var(--muted); transition: background 0.2s ease, color 0.2s ease; }
-.tryit.is-live[data-step="1"] .stepper li:nth-child(1) h3,
-.tryit.is-live[data-step="2"] .stepper li:nth-child(2) h3,
-.tryit.is-live[data-step="3"] .stepper li:nth-child(3) h3 { color: var(--accent); }
-.tryit.is-live[data-step="1"] .stepper li:nth-child(1) .num,
-.tryit.is-live[data-step="2"] .stepper li:nth-child(2) .num,
-.tryit.is-live[data-step="3"] .stepper li:nth-child(3) .num { background: var(--accent); color: #fff; }
-@media (min-width: 760px) {
-  .tryit { --k: 1.3; }
-  /* 宽屏上轨道的三个点正好对着下面三栏的中间，编号和连线就不用了 */
-  .tryit.is-live .ti-track { max-width: none; width: calc(66.667% + 69px); }
-  .tryit.is-live .stepper li { padding-top: 0; }
-  .tryit.is-live .stepper .num, .tryit.is-live .stepper li::before { display: none; }
+.demo-band { position: relative; height: 64px; border-radius: 32px; overflow: hidden; background: #E8E2D8; box-shadow: inset 0 1px 4px rgba(70, 45, 25, 0.22); }
+.demo-layer { position: absolute; inset: 0; color: #B3AA9D; }
+.demo-layer.color {
+  color: #fff; background: linear-gradient(90deg, #FFA06B, #F2634F 55%, #E3343F);
+  clip-path: inset(0 calc(100% - var(--fillpx)) 0 0);
 }
+/* 流程带上的图标：位置按进度算，把手走到哪个图标，正好演到那一步 */
+.demo-st { position: absolute; top: 50%; left: calc(29px + var(--at) * (100% - 58px)); width: 24px; height: 24px; margin: -12px; }
+.demo-st svg { width: 100%; height: 100%; display: block; }
+/* 中间那一段「滑动」：没走到时是一格一格的截图，走过以后连成一整条 */
+.demo-pages { position: absolute; top: 50%; left: calc(29px + 0.35 * (100% - 58px)); width: calc(0.34 * (100% - 58px)); height: 14px; margin-top: -7px; display: flex; gap: 5px; }
+.demo-pages span { flex: 1; border-radius: 3px; background: currentColor; }
+.demo-layer.color .demo-pages { gap: 0; }
+.demo-layer.color .demo-pages span { border-radius: 0; }
+.demo-layer.color .demo-pages span:first-child { border-radius: 4px 0 0 4px; }
+.demo-layer.color .demo-pages span:last-child { border-radius: 0 4px 4px 0; }
+/* 真正能拖的是一个透明的滑块（键盘、触屏都能用） */
+.demo-bar input {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: grab;
+  -webkit-appearance: none; appearance: none; touch-action: pan-y;
+}
+.demo-bar input:active { cursor: grabbing; }
+.demo-bar input::-webkit-slider-thumb { -webkit-appearance: none; width: 72px; height: 78px; }
+.demo-bar input::-moz-range-thumb { width: 72px; height: 78px; border: 0; }
+/* 玻璃把手：里面是流程带放大 1.45 倍的样子 */
+.demo-lens {
+  position: absolute; top: -7px; left: 7px; width: 58px; height: 92px; border-radius: 29px; overflow: hidden; pointer-events: none;
+  transform: translateX(var(--lenspx)); background: #E8E2D8;
+  box-shadow: 0 12px 24px rgba(100, 35, 20, 0.32), 0 2px 5px rgba(60, 25, 15, 0.25);
+}
+.demo-lens .demo-band { position: absolute; left: 0; top: 0; width: var(--bandw); border-radius: 0; box-shadow: none; transform-origin: 0 0; }
+.demo-lens::after {
+  content: ""; position: absolute; inset: 0; border-radius: 29px;
+  background:
+    radial-gradient(120% 55% at 30% 0%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, rgba(60, 20, 10, 0.14));
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.85), inset 0 0 0 3px rgba(255, 255, 255, 0.18), inset 0 -10px 14px rgba(255, 255, 255, 0.25);
+}
+.demo-bar input:focus-visible ~ .demo-lens { outline: 3px solid var(--ink); outline-offset: 3px; }
+.demo-hint { text-align: center; color: var(--muted); font-size: 14px; margin: 14px 0 0; }
 @media (prefers-color-scheme: dark) {
-  .ti-phone { box-shadow: 0 0 0 5px #2A2725, 0 0 0 6px rgba(255, 255, 255, 0.2), 0 16px 30px rgba(0, 0, 0, 0.5); }
-  .ti-strip { box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16), 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 0 calc(var(--stop) * 3px) var(--accent); }
+  .demo-phone { box-shadow: 0 0 0 0.65em #2A2725, 0 0 0 0.75em rgba(255, 255, 255, 0.2), 0 2em 4em rgba(0, 0, 0, 0.5); }
+  .demo-bar { background: linear-gradient(180deg, #0C0C0B, #2A2927); box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7), inset 0 -1px 0 rgba(255, 255, 255, 0.12), 0 14px 30px rgba(0, 0, 0, 0.3); }
+  .demo-band, .demo-lens { background: #2E2C29; }
+  .demo-layer { color: #6B665E; }
+  .demo-layer.color { color: #fff; }
 }
+/* 有演示时，下面三步文字跟着亮：演到哪一步，那一步变红 */
+.demo.is-live .stepper { margin-top: 26px; }
+.demo.is-live .stepper h3 { transition: color 0.2s ease; }
+.demo.is-live .stepper .num { background: var(--line); color: var(--muted); transition: background 0.2s ease, color 0.2s ease; }
+.demo.is-live[data-step="1"] .stepper li:nth-child(1) h3,
+.demo.is-live[data-step="2"] .stepper li:nth-child(2) h3,
+.demo.is-live[data-step="3"] .stepper li:nth-child(3) h3 { color: var(--accent); }
+.demo.is-live[data-step="1"] .stepper li:nth-child(1) .num,
+.demo.is-live[data-step="2"] .stepper li:nth-child(2) .num,
+.demo.is-live[data-step="3"] .stepper li:nth-child(3) .num { background: var(--accent); color: #fff; }
 
 /* 四项功能：一整块面板，中间用细线隔开；手机上一行一项，图标在左 */
 .points { list-style: none; margin: 30px 0 0; padding: 4px 22px; background: var(--card); border-radius: 20px; display: grid; }
