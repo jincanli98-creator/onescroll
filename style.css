@@ -142,14 +142,23 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
 .req { font-size: 14px; color: var(--muted); margin: 8px 0 0; }
 .req a { color: var(--ink); font-weight: 600; }
 
-.hero-media { width: min(300px, 76vw); }
-/* 还没有演示视频时放的商店截图 */
-.hero-shot {
+/* 三个卖点：小标签，放在说明和下载徽章之间 */
+.chips { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 0; margin: 18px 0 0; }
+.chips li {
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--card);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hero-media { width: min(320px, 74vw); }
+/* 还没有演示视频时放的手机图（透明底，图里自带一点投影） */
+.hero-phone {
   width: 100%;
   height: auto;
-  border-radius: 22px;
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.1);
-  background: var(--card);
+  filter: drop-shadow(0 22px 34px rgba(60, 25, 15, 0.16));
 }
 /* 竖着的演示视频套一个手机边框 */
 .phone {
@@ -174,10 +183,11 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
 }
 @media (prefers-color-scheme: dark) {
   .phone { box-shadow: 0 0 0 1px var(--line), 0 18px 44px rgba(0, 0, 0, 0.4); }
+  .hero-phone { filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.5)); }
 }
 @media (min-width: 880px) {
   .hero {
-    grid-template-columns: minmax(0, 1fr) 300px;
+    grid-template-columns: minmax(0, 1fr) 320px;
     gap: 56px;
     align-items: center;
     justify-items: start;
@@ -186,6 +196,7 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
   }
   .hero .app-icon { margin-left: 0; }
   .hero .lead { margin: 0; }
+  .chips { justify-content: flex-start; }
   .hero .store { margin-left: -14px; }
   .hero-media { justify-self: end; }
 }
