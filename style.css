@@ -153,12 +153,73 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
   white-space: nowrap;
 }
 
-.hero-media { width: min(320px, 74vw); }
-/* 还没有演示视频时放的手机图（透明底，图里自带一点投影） */
-.hero-phone {
-  width: 100%;
+.hero-media { width: min(340px, 78vw); }
+/* 还没有演示视频时：一张真实的长截图穿过一部手机，慢慢上下移动。
+   尺寸都用 cqw（这个画面宽度的 1%）：手机屏幕宽 66，离顶 31.5；长图跟屏幕一样宽，放两份、一起动 */
+.longdemo {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 340 / 700;
+}
+.longdemo-strip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 66cqw;
   height: auto;
-  filter: drop-shadow(0 22px 34px rgba(60, 25, 15, 0.16));
+  max-width: none;
+  animation: longdemo-scroll 24s linear infinite alternate;
+  will-change: transform;
+}
+/* 手机外面的部分：淡一些，上下两头渐渐消失 */
+.longdemo-behind {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.85;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent);
+}
+/* 细边加一点投影，看得出是一张长长的纸 */
+.longdemo-behind .longdemo-strip { left: 17cqw; box-shadow: 0 0 0 1px rgba(40, 20, 10, 0.1), 0 0 7cqw rgba(60, 25, 15, 0.1); }
+.longdemo-phone {
+  position: absolute;
+  left: 17cqw;
+  top: 31.5cqw;
+  width: 66cqw;
+  aspect-ratio: 1180 / 2556;
+  overflow: hidden;
+  border-radius: 9.5cqw;
+  background: #fff;
+  /* 边框用阴影画，不占位置，里外两份长图才能对齐 */
+  box-shadow: 0 0 0 2.4cqw #1E1513, 0 0 0 2.7cqw rgba(255, 255, 255, 0.14), 0 8cqw 15cqw rgba(60, 25, 15, 0.26);
+}
+.longdemo-phone .longdemo-strip { top: -31.5cqw; }
+/* 灵动岛 */
+.longdemo-phone::after {
+  content: "";
+  position: absolute;
+  top: 2.4cqw;
+  left: 50%;
+  width: 20cqw;
+  height: 5.8cqw;
+  margin-left: -10cqw;
+  border-radius: 3cqw;
+  background: #111;
+}
+@keyframes longdemo-scroll {
+  0%, 5% { transform: translateY(0); }
+  95%, 100% { transform: translateY(-196.49cqw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .longdemo-strip { animation: none; transform: translateY(-58.95cqw); }
+}
+/* 很旧的浏览器不认 cqw：只显示手机，不动 */
+@supports not (width: 1cqw) {
+  .longdemo-behind { display: none; }
+  .longdemo-phone { position: relative; left: auto; top: auto; width: 66%; margin: 0 auto; border-radius: 30px; box-shadow: 0 0 0 8px #1E1513; }
+  .longdemo-phone .longdemo-strip { position: static; width: 100%; animation: none; transform: none; }
+  .longdemo { aspect-ratio: auto; padding: 20px 0; }
 }
 /* 竖着的演示视频套一个手机边框 */
 .phone {
@@ -183,11 +244,12 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
 }
 @media (prefers-color-scheme: dark) {
   .phone { box-shadow: 0 0 0 1px var(--line), 0 18px 44px rgba(0, 0, 0, 0.4); }
-  .hero-phone { filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.5)); }
+  .longdemo-behind { opacity: 0.5; }
+  .longdemo-phone { box-shadow: 0 0 0 2.4cqw #2A2725, 0 0 0 2.7cqw rgba(255, 255, 255, 0.2), 0 8cqw 15cqw rgba(0, 0, 0, 0.5); }
 }
 @media (min-width: 880px) {
   .hero {
-    grid-template-columns: minmax(0, 1fr) 320px;
+    grid-template-columns: minmax(0, 1fr) 340px;
     gap: 56px;
     align-items: center;
     justify-items: start;
