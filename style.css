@@ -348,3 +348,29 @@ main details p { margin: 0 0 10px; }
 }
 .foot .links { flex-wrap: wrap; margin-bottom: 10px; }
 .foot p { margin: 4px 0; }
+
+/* 问题型页面（/how-to-…/ 这些，版式沿用帮助页） */
+.crumb { font-size: 14px; margin: 0 0 6px; }
+.crumb a { color: var(--muted); text-decoration: none; }
+.crumb a:hover { color: var(--ink); }
+.byline { font-size: 14px; }
+/* 开头先给答案 */
+.answer {
+  background: var(--card);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px 16px 16px 6px;
+  padding: 16px 18px;
+  margin: 20px 0 0;
+  font-size: 18px;
+}
+.tablewrap { overflow-x: auto; margin: 12px -20px; padding: 0 20px; }
+.guide table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; }
+.guide th, .guide td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.guide thead th { font-family: var(--serif); font-size: 16px; }
+.guide tbody th { font-weight: 600; white-space: nowrap; }
+.guide-cta { text-align: center; margin: 28px 0; padding: 26px 22px 22px; }
+.guide-cta .cta-title { font: 700 22px/1.25 var(--serif); color: var(--ink); margin: 0 0 6px; }
+.guidelist { margin-top: 16px; }
+.guidelist .card { display: block; text-decoration: none; transition: box-shadow 0.2s ease; }
+.guidelist .card:hover { box-shadow: inset 0 0 0 2px var(--line); }
+.guidelist .card h3 { color: var(--ink); }
