@@ -2,5 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://onescrollapp.com/</loc></url>
   <url><loc>https://onescrollapp.com/help.html</loc></url>
+  <url><loc>https://onescrollapp.com/zh/</loc></url>
+  <url><loc>https://onescrollapp.com/zh/help.html</loc></url>
+  <url><loc>https://onescrollapp.com/zh-hant/</loc></url>
+  <url><loc>https://onescrollapp.com/zh-hant/help.html</loc></url>
+  <url><loc>https://onescrollapp.com/ja/</loc></url>
+  <url><loc>https://onescrollapp.com/ja/help.html</loc></url>
   <url><loc>https://onescrollapp.com/privacy.html</loc></url>
 </urlset>

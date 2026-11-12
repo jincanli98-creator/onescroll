@@ -1,4 +1,4 @@
-/* 网站共用样式（index.html、help.html），配色和字体跟 privacy.html 一致。 */
+/* 网站共用样式（各语言的首页、帮助页，由 site-src/build.py 生成），配色和字体跟 privacy.html 一致。 */
 
 :root {
   --bg: #F7F6F2;
@@ -8,8 +8,8 @@
   --line: #E2E0DA;
   --accent: #EE5A4F;
   --accent-soft: #FCE9E5;
-  --serif: "New York", "Iowan Old Style", Georgia, "Songti SC", serif;
-  --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Segoe UI", "Microsoft YaHei", sans-serif;
+  --serif: "New York", "Iowan Old Style", Georgia, "Songti SC", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "PingFang TC", "Hiragino Sans", "Helvetica Neue", "Segoe UI", "Microsoft YaHei", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -23,9 +23,6 @@
   }
 }
 
-/* 中英切换：lang.js 给 <html> 设 data-lang="en" 或 "zh"；浏览器没开 JS 时显示英文。 */
-[data-lang="en"] .zh, [data-lang="zh"] .en, html:not([data-lang]) .zh { display: none !important; }
-
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
@@ -37,6 +34,8 @@ body {
 a { color: var(--ink); }
 img { max-width: 100%; display: block; }
 h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
+/* 日文、中文标题不在词中间断行 */
+:lang(ja) h1, :lang(ja) h2 { word-break: keep-all; overflow-wrap: anywhere; line-height: 1.3; }
 
 .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 .narrow { max-width: 720px; }
@@ -61,43 +60,68 @@ h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
 }
 .brand img { width: 32px; height: 32px; border-radius: 8px; }
 .links { display: flex; align-items: center; gap: 16px; font-size: 15px; }
-.links a { color: var(--muted); text-decoration: none; }
+.links a { color: var(--muted); text-decoration: none; white-space: nowrap; }
 .links a:hover, .links a[aria-current="page"] { color: var(--ink); }
-.langs {
-  display: inline-flex;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  overflow: hidden;
-}
-.langs button {
-  font: inherit;
-  font-size: 13px;
-  line-height: 1;
-  padding: 7px 11px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-}
-[data-lang="en"] .langs [data-set="en"],
-[data-lang="zh"] .langs [data-set="zh"],
-html:not([data-lang]) .langs [data-set="en"] { background: var(--ink); color: var(--bg); }
 @media (max-width: 480px) {
   .links { gap: 12px; }
   .brand span { display: none; }
 }
 
-/* 首屏 */
-.hero { text-align: center; padding: 48px 0 8px; }
+/* 语言菜单：每种语言是一个单独的网址，这里只是链接，不用 JS */
+.langmenu { position: relative; }
+.langmenu summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  white-space: nowrap;
+  user-select: none;
+}
+.langmenu summary::-webkit-details-marker { display: none; }
+.langmenu summary svg { width: 15px; height: 15px; }
+.langmenu summary:hover, .langmenu[open] summary { color: var(--ink); }
+.langlist {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 10;
+  display: grid;
+  min-width: 150px;
+  padding: 6px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+.links .langlist a { padding: 9px 12px; border-radius: 9px; color: var(--ink); }
+.links .langlist a:hover { background: var(--bg); }
+.links .langlist a[aria-current] { font-weight: 600; }
+
+/* 首屏：手机上文字在上、演示在下；宽屏上文字在左、演示在右 */
+.hero {
+  display: grid;
+  gap: 36px;
+  justify-items: center;
+  text-align: center;
+  padding: 40px 0 8px;
+}
+.hero-text { max-width: 620px; }
 .hero .app-icon {
-  width: 96px;
-  height: 96px;
-  border-radius: 22px;
-  margin: 0 auto 22px;
+  width: 72px;
+  height: 72px;
+  border-radius: 17px;
+  margin: 0 auto 20px;
   box-shadow: 0 10px 28px rgba(229, 59, 65, 0.25);
 }
 .hero h1 {
-  font-size: clamp(34px, 7vw, 58px);
+  font-size: clamp(34px, 6vw, 54px);
   margin: 0 0 14px;
   letter-spacing: -0.01em;
 }
@@ -107,7 +131,7 @@ html:not([data-lang]) .langs [data-set="en"] { background: var(--ink); color: va
   max-width: 620px;
   margin: 0 auto;
 }
-/* App Store 官方徽章（苹果营销工具下载的黑色版，中英文各一张）：不能改图，高度 ≥ 40px，
+/* App Store 官方徽章（苹果营销工具下载的黑色版，每种语言一张）：不能改图，高度 ≥ 40px，
    四周留白 ≥ 徽章高度的 1/4，这里用 padding 留出来 */
 .store {
   display: inline-block;
@@ -115,7 +139,56 @@ html:not([data-lang]) .langs [data-set="en"] { background: var(--ink); color: va
   padding: 14px;
 }
 .store img { height: 54px; width: auto; max-width: none; }
-.req { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
+.req { font-size: 14px; color: var(--muted); margin: 8px 0 0; }
+.req a { color: var(--ink); font-weight: 600; }
+
+.hero-media { width: min(300px, 76vw); }
+/* 还没有演示视频时放的商店截图 */
+.hero-shot {
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.1);
+  background: var(--card);
+}
+/* 竖着的演示视频套一个手机边框 */
+.phone {
+  padding: 9px;
+  border-radius: 46px;
+  background: #1E1513;
+  box-shadow: 0 18px 44px rgba(90, 15, 20, 0.18);
+}
+.phone video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 37px;
+  background: var(--card);
+}
+.clip video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.1);
+}
+@media (prefers-color-scheme: dark) {
+  .phone { box-shadow: 0 0 0 1px var(--line), 0 18px 44px rgba(0, 0, 0, 0.4); }
+}
+@media (min-width: 880px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 56px;
+    align-items: center;
+    justify-items: start;
+    text-align: left;
+    padding: 56px 0 16px;
+  }
+  .hero .app-icon { margin-left: 0; }
+  .hero .lead { margin: 0; }
+  .hero .store { margin-left: -14px; }
+  .hero-media { justify-self: end; }
+}
 
 /* 截图条：手机上左右滑，宽屏上一排放下 */
 .shots {
@@ -140,7 +213,7 @@ html:not([data-lang]) .langs [data-set="en"] { background: var(--ink); color: va
   background: var(--card);
 }
 @media (min-width: 1000px) {
-  .shots { overflow: visible; margin: 0; padding: 32px 0 16px; }
+  .shots { overflow: visible; margin: 0; padding: 32px 0 16px; justify-content: center; }
   .shots img { width: calc((100% - 64px) / 5); }
 }
 
@@ -198,6 +271,11 @@ html:not([data-lang]) .langs [data-set="en"] { background: var(--ink); color: va
   transform: rotate(-45deg);
 }
 
+/* 页面最后再放一次下载 */
+.cta { text-align: center; }
+.cta .sub { margin-bottom: 0; }
+.questions { text-align: center; padding-top: 0; }
+
 /* 帮助页 */
 .page-title { padding: 32px 0 8px; }
 .page-title h1 { font-size: clamp(32px, 6vw, 44px); margin: 0 0 8px; }
@@ -221,21 +299,21 @@ html:not([data-lang]) .langs [data-set="en"] { background: var(--ink); color: va
   font-weight: 600;
   white-space: normal;
 }
-details {
+main details {
   background: var(--card);
   border-radius: 16px;
   padding: 0 18px;
   margin: 10px 0;
 }
-summary {
+main summary {
   cursor: pointer;
   padding: 15px 28px 15px 0;
   font-weight: 600;
   list-style: none;
   position: relative;
 }
-summary::-webkit-details-marker { display: none; }
-summary::after {
+main summary::-webkit-details-marker { display: none; }
+main summary::after {
   content: "+";
   position: absolute;
   right: 0;
@@ -243,10 +321,10 @@ summary::after {
   font: 400 22px/1 var(--sans);
   color: var(--muted);
 }
-details[open] summary::after { content: "–"; }
-details > :not(summary) { margin-top: 0; }
-details > :last-child { padding-bottom: 16px; margin-bottom: 0; }
-details p { margin: 0 0 10px; }
+main details[open] summary::after { content: "–"; }
+main details > :not(summary) { margin-top: 0; }
+main details > :last-child { padding-bottom: 16px; margin-bottom: 0; }
+main details p { margin: 0 0 10px; }
 
 .contact { text-align: center; padding: 28px 22px; }
 .contact .button {
