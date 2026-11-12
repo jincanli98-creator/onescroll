@@ -24,7 +24,7 @@
 <meta name="apple-itunes-app" content="app-id=6829387998">
 <link rel="icon" type="image/png" href="/img/favicon-64.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css?v=11">
+<link rel="stylesheet" href="/style.css?v=13">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "MobileApplication", "name": "OneScroll: 長いスクショ", "description": "コントロールセンターでタップして、スクロールして、止めるだけ。OneScrollがスクロールしながらつなぎ合わせ、1枚の長いスクショを写真に保存します。処理はすべてiPhoneの中で行われます。", "url": "https://onescrollapp.com/ja/", "image": "https://onescrollapp.com/img/icon-256.png", "operatingSystem": "iOS 27", "applicationCategory": "UtilitiesApplication", "availableOnDevice": "iPhone", "installUrl": "https://apps.apple.com/app/id6829387998", "downloadUrl": "https://apps.apple.com/app/id6829387998", "inLanguage": "ja", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "ダウンロード無料。最初の5枚は無料で、その後は一度のアプリ内購入でフルバージョンをアンロックできます。サブスクリプションではありません。"}}</script>
 </head>
 <body>
@@ -65,24 +65,46 @@
 
     <section class="section" id="how">
       <h2>タップして、スクロールして、止めるだけ。</h2>
-      <ol class="stepper">
+      <div class="tryit" data-step="1">
+        <div class="ti-live">
+          <div class="ti-stage" aria-hidden="true">
+            <div class="ti-phone"><img class="ti-page" src="/img/hero-long.webp" width="520" height="3170" alt="" loading="lazy"><i class="ti-island"></i></div>
+            <div class="ti-result">
+              <div class="ti-strip"><img src="/img/hero-long.webp" width="520" height="3170" alt="" loading="lazy"></div>
+              <span class="ti-saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>写真に保存しました</span>
+            </div>
+          </div>
+          <div class="ti-track">
+            <span class="ti-line"></span>
+            <span class="ti-stop" style="--at:0"></span><span class="ti-stop" style="--at:.5"></span><span class="ti-stop" style="--at:1"></span>
+            <input type="range" min="0" max="1000" value="0" step="1" aria-label="お試し：「タップ」から「停止」までドラッグ">
+            <span class="ti-knob" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6.5l5 5 5-5M7 13l5 5 5-5"/></svg>
+              <svg viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <p class="ti-hint">つまみをドラッグして試す</p>
+        </div>
+        <ol class="stepper">
         <li>
           <div class="num">1</div>
-          <h3>コントロールセンターに追加</h3>
-          <p>最初の1回だけ。「コントロールを追加」で「OneScroll」を検索。</p>
+          <h3>タップ</h3>
+          <p>コントロールセンターで「長いスクショ」をタップし、「画面全体」を選びます。</p>
         </li>
         <li>
           <div class="num">2</div>
-          <h3>「長いスクショ」をタップ</h3>
-          <p>続けて「画面全体」を選びます。</p>
+          <h3>スクロール</h3>
+          <p>一定の速さで。スクロールしながらつなぎ合わせます。</p>
         </li>
         <li>
           <div class="num">3</div>
-          <h3>スクロールして、止める</h3>
+          <h3>止める</h3>
           <p>数秒後には写真に保存されています。</p>
         </li>
-      </ol>
-      <p class="more"><a href="/ja/help.html">詳しい手順を見る</a></p>
+        </ol>
+      </div>
+      <p class="more">初回だけ、「長いスクショ」をコントロールセンターに追加します。 <a href="/ja/help.html">詳しい手順を見る</a></p>
     </section>
 
     <section class="section" id="features">
@@ -172,5 +194,56 @@
     <p>Apple、Appleのロゴ、iPhone、App Storeは、米国その他の国や地域で登録されたApple Inc.の商標です。</p>
   </footer>
 </div>
+<script>
+// 「三步用法」里可以拖的演示。把手的位置 0~1 写进 --p，画面怎么变都在 style.css 里按 --p 算。
+// 这一段滚进屏幕时先自己演一遍；人一碰就停下，交给人拖。浏览器没开 JS 时只显示三步文字。
+(function () {
+  var box = document.querySelector('.tryit');
+  if (!box) return;
+  var input = box.querySelector('input');
+  var titles = box.querySelectorAll('.stepper h3');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var frame = 0;
+  function show() {
+    var p = input.value / 1000;
+    var step = p < 0.03 ? 1 : p < 0.94 ? 2 : 3;
+    box.style.setProperty('--p', p);
+    box.setAttribute('data-step', step);
+    if (titles[step - 1]) input.setAttribute('aria-valuetext', titles[step - 1].textContent);
+  }
+  function hands() {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    box.classList.add('touched');
+  }
+  function glide(from, to, ms, done) {
+    var start = performance.now();
+    (function tick(now) {
+      var t = Math.min(1, (now - start) / ms);
+      var eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      input.value = Math.round((from + (to - from) * eased) * 1000);
+      show();
+      if (t < 1) frame = requestAnimationFrame(tick);
+      else { frame = 0; if (done) done(); }
+    })(start);
+  }
+  input.addEventListener('input', function () { hands(); show(); });
+  ['pointerdown', 'touchstart', 'keydown'].forEach(function (name) {
+    input.addEventListener(name, hands, { passive: true });
+  });
+  box.classList.add('is-live');
+  show();
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var seen = new IntersectionObserver(function (entries) {
+    if (!entries[0].isIntersecting) return;
+    seen.disconnect();
+    if (box.classList.contains('touched')) return;
+    glide(0, 1, 5200, function () {
+      setTimeout(function () { if (!box.classList.contains('touched')) glide(1, 0, 900); }, 1600);
+    });
+  }, { threshold: 0.9 });
+  seen.observe(box.querySelector('.ti-track'));
+})();
+</script>
 </body>
 </html>

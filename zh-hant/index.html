@@ -24,7 +24,7 @@
 <meta name="apple-itunes-app" content="app-id=6829387998">
 <link rel="icon" type="image/png" href="/img/favicon-64.png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css?v=11">
+<link rel="stylesheet" href="/style.css?v=13">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "MobileApplication", "name": "一滑長圖（OneScroll）", "description": "在控制中心點一下，往下滑，再停下。一滑長圖邊滑邊拼，把一張長截圖存進「照片」。所有處理都在你的 iPhone 上完成。", "url": "https://onescrollapp.com/zh-hant/", "image": "https://onescrollapp.com/img/icon-256.png", "operatingSystem": "iOS 27", "applicationCategory": "UtilitiesApplication", "availableOnDevice": "iPhone", "installUrl": "https://apps.apple.com/app/id6829387998", "downloadUrl": "https://apps.apple.com/app/id6829387998", "inLanguage": "zh-Hant", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "免費下載，前 5 張長圖免費；之後在 App 內一次購買解鎖完整版，不限張數，不是訂閱。"}}</script>
 </head>
 <body>
@@ -65,24 +65,46 @@
 
     <section class="section" id="how">
       <h2>點一下，滑一滑，停下。</h2>
-      <ol class="stepper">
+      <div class="tryit" data-step="1">
+        <div class="ti-live">
+          <div class="ti-stage" aria-hidden="true">
+            <div class="ti-phone"><img class="ti-page" src="/img/hero-long.webp" width="520" height="3170" alt="" loading="lazy"><i class="ti-island"></i></div>
+            <div class="ti-result">
+              <div class="ti-strip"><img src="/img/hero-long.webp" width="520" height="3170" alt="" loading="lazy"></div>
+              <span class="ti-saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>已存入「照片」</span>
+            </div>
+          </div>
+          <div class="ti-track">
+            <span class="ti-line"></span>
+            <span class="ti-stop" style="--at:0"></span><span class="ti-stop" style="--at:.5"></span><span class="ti-stop" style="--at:1"></span>
+            <input type="range" min="0" max="1000" value="0" step="1" aria-label="試試看：從「點一下」拖到「停止」">
+            <span class="ti-knob" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.5" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6.5l5 5 5-5M7 13l5 5 5-5"/></svg>
+              <svg viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2.5" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <p class="ti-hint">拖移圓鈕，試試看</p>
+        </div>
+        <ol class="stepper">
         <li>
           <div class="num">1</div>
-          <h3>加入控制中心</h3>
-          <p>只要一次：在「加入控制項目」裡搜尋「一滑長圖」。</p>
+          <h3>點一下</h3>
+          <p>在控制中心點「截長圖」，再選「整個螢幕」。</p>
         </li>
         <li>
           <div class="num">2</div>
-          <h3>點「截長圖」</h3>
-          <p>再選「整個螢幕」。</p>
+          <h3>滑一滑</h3>
+          <p>等速滑動，一滑長圖邊滑邊拼。</p>
         </li>
         <li>
           <div class="num">3</div>
-          <h3>滑完，點停止</h3>
+          <h3>停下</h3>
           <p>幾秒後長圖就在「照片」裡。</p>
         </li>
-      </ol>
-      <p class="more"><a href="/zh-hant/help.html">查看詳細步驟</a></p>
+        </ol>
+      </div>
+      <p class="more">第一次使用前，先把「截長圖」加入控制中心。 <a href="/zh-hant/help.html">查看詳細步驟</a></p>
     </section>
 
     <section class="section" id="features">
@@ -172,5 +194,56 @@
     <p>Apple、Apple 標誌、iPhone 和 App Store 是 Apple Inc. 在美國及其他國家和地區註冊的商標。</p>
   </footer>
 </div>
+<script>
+// 「三步用法」里可以拖的演示。把手的位置 0~1 写进 --p，画面怎么变都在 style.css 里按 --p 算。
+// 这一段滚进屏幕时先自己演一遍；人一碰就停下，交给人拖。浏览器没开 JS 时只显示三步文字。
+(function () {
+  var box = document.querySelector('.tryit');
+  if (!box) return;
+  var input = box.querySelector('input');
+  var titles = box.querySelectorAll('.stepper h3');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var frame = 0;
+  function show() {
+    var p = input.value / 1000;
+    var step = p < 0.03 ? 1 : p < 0.94 ? 2 : 3;
+    box.style.setProperty('--p', p);
+    box.setAttribute('data-step', step);
+    if (titles[step - 1]) input.setAttribute('aria-valuetext', titles[step - 1].textContent);
+  }
+  function hands() {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    box.classList.add('touched');
+  }
+  function glide(from, to, ms, done) {
+    var start = performance.now();
+    (function tick(now) {
+      var t = Math.min(1, (now - start) / ms);
+      var eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+      input.value = Math.round((from + (to - from) * eased) * 1000);
+      show();
+      if (t < 1) frame = requestAnimationFrame(tick);
+      else { frame = 0; if (done) done(); }
+    })(start);
+  }
+  input.addEventListener('input', function () { hands(); show(); });
+  ['pointerdown', 'touchstart', 'keydown'].forEach(function (name) {
+    input.addEventListener(name, hands, { passive: true });
+  });
+  box.classList.add('is-live');
+  show();
+  if (reduce || !('IntersectionObserver' in window)) return;
+  var seen = new IntersectionObserver(function (entries) {
+    if (!entries[0].isIntersecting) return;
+    seen.disconnect();
+    if (box.classList.contains('touched')) return;
+    glide(0, 1, 5200, function () {
+      setTimeout(function () { if (!box.classList.contains('touched')) glide(1, 0, 900); }, 1600);
+    });
+  }, { threshold: 0.9 });
+  seen.observe(box.querySelector('.ti-track'));
+})();
+</script>
 </body>
 </html>
