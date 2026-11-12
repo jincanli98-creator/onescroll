@@ -34,8 +34,8 @@ body {
 a { color: var(--ink); }
 img { max-width: 100%; display: block; }
 h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
-/* 日文、中文标题不在词中间断行 */
-:lang(ja) h1, :lang(ja) h2 { word-break: keep-all; overflow-wrap: anywhere; line-height: 1.3; }
+/* 日文标题：小写假名（ョ、ッ）和标点不落在行首 */
+:lang(ja) h1, :lang(ja) h2, :lang(ja) h3 { line-break: strict; line-height: 1.3; }
 
 .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 .narrow { max-width: 720px; }
