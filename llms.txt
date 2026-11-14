@@ -22,6 +22,7 @@ OneScroll is an iPhone app for long (scrolling) screenshots. It watches the scre
 - [How to Screenshot an Entire Conversation on iPhone](https://onescrollapp.com/screenshot-entire-conversation-iphone/): A normal screenshot shows one screen of a chat. Here is how to save a whole text conversation as a single long image on iPhone, with tips on where to start and what to crop.
 - [How to Take a Long Screenshot in Any iPhone App](https://onescrollapp.com/long-screenshot-any-app-iphone/): Full Page screenshots only work in apps that support them. How to capture a long screenshot in almost any iPhone app by scrolling once, and what can't be captured.
 - [How to Stitch Screenshots Together on iPhone](https://onescrollapp.com/stitch-screenshots-iphone/): iPhone has no one-tap way to stitch screenshots. Three options: Combine Images in Shortcuts, a stitching app, or skipping the stitching with one long screenshot.
+- [Choosing a Long Screenshot App for iPhone: 6 Things to Check](https://onescrollapp.com/choose-long-screenshot-app-iphone/): Six things to check before you pick a long screenshot app for iPhone: clean joins, a clean top, no leftover recording, which apps it works in, price and privacy.
 
 ## Help and policies
 
