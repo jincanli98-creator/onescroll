@@ -13,7 +13,7 @@ OneScroll is an iPhone app for long (scrolling) screenshots. It watches the scre
 - Some videos and password fields are protected by iOS and record as black.
 - Requires an iPhone with iOS 27 or later.
 - Free to download. The first 5 long screenshots are free; a one-time in-app purchase (US$2.99 in the US; prices vary by country) then unlocks unlimited use. No subscription. Restore Purchases brings it back on a new iPhone.
-- App languages: English and Simplified Chinese.
+- App languages: English, Simplified Chinese, Traditional Chinese and Japanese.
 
 ## Guides
 
